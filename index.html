@@ -182,13 +182,40 @@
             position: fixed;
             inset: 0;
             z-index: 50;
-            background: rgba(3, 7, 18, 0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
         .modal.active { display: flex; }
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 42rem;
+            width: 100%;
+            box-shadow: 0 20px 40px -8px var(--card-shadow);
+            position: relative;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            transition: color 0.2s;
+        }
+        .modal-close-btn:hover { color: var(--text-title); }
     </style>
 </head>
 <body class="p-0 leading-relaxed light-theme">
@@ -202,8 +229,8 @@
 
     <!-- Modal for Details -->
     <div id="detailModal" class="modal" onclick="closeModal(event)">
-        <div class="bg-slate-900 border border-slate-800 text-slate-100 rounded-3xl p-10 max-w-2xl w-full shadow-2xl relative animate-in fade-in zoom-in duration-300" onclick="event.stopPropagation()">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-500 hover:text-slate-100 transition-colors">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="modal-close-btn">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div id="modalContent">
@@ -1075,11 +1102,11 @@
                 'dobong': `
                     <div class="space-y-6">
                         <h2 class="text-3xl font-black text-[var(--text-title)]">도봉구: 창동역 루프탑 피크닉 시네마</h2>
-                        <div class="aspect-video w-full bg-slate-800 rounded-2xl overflow-hidden mb-4 border border-slate-700">
+                        <div class="aspect-video w-full rounded-2xl overflow-hidden mb-4 border border-[var(--inner-card-border)]" style="background:var(--inner-card-bg)">
                             <img src="" alt="Dobong" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-4">
-                            <h4 class="text-lg font-bold text-blue-400">추진 계획</h4>
+                            <h4 class="text-lg font-bold text-blue-500">추진 계획</h4>
                             <p class="text-sm text-[var(--text-color)] leading-relaxed">• 장소: 창동역 유휴 주차장 부지 및 플랫폼61 인근 야외 광장<br>• 일정: 매월 마지막 주 금요일 저녁 (20대 집중 요일)<br>• 프로그램: 돗자리 피크닉 시네마(청년층 선호 대중 영화) 및 영화 상영 전 청년 버스커들의 OST 라이브 콘서트 사전 공연</p>
                         </div>
                     </div>
@@ -1087,11 +1114,11 @@
                 'jungnang': `
                     <div class="space-y-6">
                         <h2 class="text-3xl font-black text-[var(--text-title)]">중랑구: 면목동 몰입형 미드나잇 시네마</h2>
-                        <div class="aspect-video w-full bg-slate-800 rounded-2xl overflow-hidden mb-4 border border-slate-700">
+                        <div class="aspect-video w-full rounded-2xl overflow-hidden mb-4 border border-[var(--inner-card-border)]" style="background:var(--inner-card-bg)">
                             <img src="" alt="Jungnang" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-4">
-                            <h4 class="text-lg font-bold text-indigo-400">추진 계획</h4>
+                            <h4 class="text-lg font-bold text-indigo-500">추진 계획</h4>
                             <p class="text-sm text-[var(--text-color)] leading-relaxed">• 장소: 면목동 일대 유휴 지하 공간 및 로컬 청년 운영 카페<br>• 운영: 드레스코드 지정 및 팝업 식음료 제공의 몰입형 무료 상영회<br>• 프로그램: 독립/단편 영화 무료 릴레이 상영, 청년 독립영화제 굿즈 플리마켓 및 청년 신진 감독 GV(관객과의 대화) 토크쇼</p>
                         </div>
                     </div>
@@ -1099,11 +1126,11 @@
                 'yangcheon': `
                     <div class="space-y-6">
                         <h2 class="text-3xl font-black text-[var(--text-title)]">양천구: 안양천 리버사이드 사일런트 시네마</h2>
-                        <div class="aspect-video w-full bg-slate-800 rounded-2xl overflow-hidden mb-4 border border-slate-700">
+                        <div class="aspect-video w-full rounded-2xl overflow-hidden mb-4 border border-[var(--inner-card-border)]" style="background:var(--inner-card-bg)">
                             <img src="" alt="Yangcheon" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-4">
-                            <h4 class="text-lg font-bold text-slate-350">추진 계획</h4>
+                            <h4 class="text-lg font-bold text-[var(--text-muted)]">추진 계획</h4>
                             <p class="text-sm text-[var(--text-color)] leading-relaxed">• 장소: 안양천 목동교 일대 수변 공원 야외 잔디밭<br>• 일정: 봄 및 가을 시즌 금/토 야간 상영<br>• 프로그램: 무선 헤드폰을 활용한 소음 제로 영화제(사일런트 시네마) 개최, 감성 텐트 대여 서비스 및 푸드트럭 야시장 연계</p>
                         </div>
                     </div>
@@ -1116,7 +1143,7 @@
         function showFullRankings() {
             const tableHTML = `
                 <div class="space-y-6">
-                    <div class="px-4 py-1.5 bg-slate-800 text-white rounded-lg text-xs font-bold inline-block">전체 진단 결과</div>
+                    <div class="px-4 py-1.5 rounded-lg text-xs font-bold inline-block" style="background:var(--inner-card-bg);color:var(--text-color);border:1px solid var(--inner-card-border)">전체 진단 결과</div>
                     <h2 class="text-3xl font-black text-[var(--text-title)]">문화 소외 지수 순위 (4위~10위)</h2>
                     <div class="overflow-x-auto mt-6">
                         <table class="w-full text-left border-collapse text-xs md:text-sm">
