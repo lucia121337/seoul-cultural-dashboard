@@ -522,7 +522,7 @@
     </svg>
                         <div class="flex items-center justify-center gap-2 mt-3 mb-1 flex-wrap">
                             <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">낮음 (문화 인프라 양호)</span>
-                            <div style="width:80px; height:8px; background: linear-gradient(to right, rgb(199,210,254), rgb(99,102,241), rgb(30,58,138)); border-radius:4px; flex-shrink:0;"></div>
+                            <div style="width:80px; height:8px; background: linear-gradient(to right, rgb(30,58,138), rgb(99,102,241), rgb(199,210,254)); border-radius:4px; flex-shrink:0;"></div>
                             <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">높음 (소외)</span>
                             <div class="flex items-center gap-1 ml-2">
                                 <div style="width:18px; height:8px; border: 2.5px solid #fbbf24; background:rgb(30,58,138); border-radius:2px; box-shadow:0 0 4px rgba(251,191,36,0.5);"></div>
@@ -1004,8 +1004,8 @@
             Object.entries(districtStats).forEach(([name, data]) => {
                 const el = document.getElementById('path-' + name);
                 if (!el) return;
-                // 대시보드 톤: 소외 낮음=연한 인디고, 소외 높음=짙은 인디고/네이비
-                const t = (data.cultural_neglect_index - minV) / (maxV - minV);
+                // 과밀(이벤트 많음=소외낮음)=짙은 인디고, 소외지역(이벤트 적음)=연한 인디고
+                const t = 1 - (data.cultural_neglect_index - minV) / (maxV - minV);
                 let r, g, b;
                 if (t < 0.5) {
                     const s = t * 2;
