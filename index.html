@@ -237,12 +237,12 @@
         }
         .heatmap-district:hover { filter: brightness(0.82); }
         .heatmap-top3 {
-            stroke: #fff !important;
-            stroke-width: 3px !important;
-            stroke-dasharray: 6,2 !important;
-            filter: drop-shadow(0 0 4px rgba(0,0,0,0.45));
+            stroke: #fbbf24 !important;
+            stroke-width: 3.5px !important;
+            stroke-dasharray: none !important;
+            filter: drop-shadow(0 0 5px rgba(251,191,36,0.6));
         }
-        .heatmap-top3:hover { filter: brightness(0.85) drop-shadow(0 0 5px rgba(0,0,0,0.5)); }
+        .heatmap-top3:hover { filter: brightness(0.88) drop-shadow(0 0 6px rgba(251,191,36,0.7)); }
     </style>
 </head>
 <body class="p-0 leading-relaxed light-theme">
@@ -431,7 +431,7 @@
                                 <td class="py-7 font-black text-xl text-[var(--text-title)]">중랑구</td>
                                 <td class="py-7 text-center font-extrabold text-[var(--text-title)] text-xl">0.9676</td>
                                 <td class="py-7 text-center text-[var(--text-color)]">0.99</td>
-                                <td class="py-7 text-center font-extrabold text-[var(--text-title)] bg-slate-900/30 rounded-2xl">1.00</td>
+                                <td class="py-7 text-center font-extrabold text-indigo-700 bg-indigo-100 rounded-2xl">1.00</td>
                                 <td class="py-7 text-center text-[var(--text-color)]">0.90</td>
                             </tr>
                             <tr class="group hover:bg-[var(--table-hover-bg)] transition-all cursor-pointer" onclick="showDistrictDetail('양천구')">
@@ -522,10 +522,10 @@
     </svg>
                         <div class="flex items-center justify-center gap-2 mt-3 mb-1 flex-wrap">
                             <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">낮음 (문화 인프라 양호)</span>
-                            <div style="width:80px; height:8px; background: linear-gradient(to right, rgb(96,165,250), rgb(250,204,21), rgb(239,68,68)); border-radius:4px; flex-shrink:0;"></div>
+                            <div style="width:80px; height:8px; background: linear-gradient(to right, rgb(199,210,254), rgb(99,102,241), rgb(30,58,138)); border-radius:4px; flex-shrink:0;"></div>
                             <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">높음 (소외)</span>
                             <div class="flex items-center gap-1 ml-2">
-                                <div style="width:18px; height:8px; border: 2.5px dashed #fff; background:rgb(220,38,38); border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.3);"></div>
+                                <div style="width:18px; height:8px; border: 2.5px solid #fbbf24; background:rgb(30,58,138); border-radius:2px; box-shadow:0 0 4px rgba(251,191,36,0.5);"></div>
                                 <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">TOP 3 소외지역</span>
                             </div>
                         </div>
@@ -1004,18 +1004,21 @@
             Object.entries(districtStats).forEach(([name, data]) => {
                 const el = document.getElementById('path-' + name);
                 if (!el) return;
+                // 대시보드 톤: 소외 낮음=연한 인디고, 소외 높음=짙은 인디고/네이비
                 const t = (data.cultural_neglect_index - minV) / (maxV - minV);
                 let r, g, b;
                 if (t < 0.5) {
                     const s = t * 2;
-                    r = Math.round(96  + (250 - 96)  * s);
-                    g = Math.round(165 + (204 - 165) * s);
-                    b = Math.round(250 + (21  - 250) * s);
+                    // 연한 인디고 #c7d2fe → 중간 인디고 #6366f1
+                    r = Math.round(199 + (99  - 199) * s);
+                    g = Math.round(210 + (102 - 210) * s);
+                    b = Math.round(254 + (241 - 254) * s);
                 } else {
                     const s = (t - 0.5) * 2;
-                    r = Math.round(250 + (239 - 250) * s);
-                    g = Math.round(204 + (68  - 204) * s);
-                    b = Math.round(21  + (68  - 21)  * s);
+                    // 중간 인디고 #6366f1 → 딥 네이비 #1e3a8a
+                    r = Math.round(99  + (30  - 99)  * s);
+                    g = Math.round(102 + (58  - 102) * s);
+                    b = Math.round(241 + (138 - 241) * s);
                 }
                 el.style.fill = `rgb(${r},${g},${b})`;
                 el.style.fillOpacity = '0.88';
@@ -1054,9 +1057,9 @@
                 badgeColor = "bg-blue-600 text-white font-black animate-pulse";
                 depthAnalysis = `
                     <div class="p-5 bg-blue-950/40 border border-blue-900/60 rounded-2xl space-y-2">
-                        <p class="text-xs text-blue-400 font-black">🔥 1위 도봉구 진단 총평 (종합 취약)</p>
-                        <p class="text-xs md:text-sm text-[var(--text-color)] leading-relaxed font-semibold">
-                            도봉구는 인구 30.3만 명 대비 문화 행사 수가 52건에 불과하여 <strong>공급 점수(0.99)</strong>가 극도로 높고(소외됨), 대중교통 접근 지표인 지하철역 수 역시 3개로 <strong>접근성 점수(0.97)</strong>가 매우 취약합니다. 
+                        <p class="text-xs text-blue-200 font-black">🔥 1위 도봉구 진단 총평 (종합 취약)</p>
+                        <p class="text-xs md:text-sm text-white leading-relaxed font-semibold">
+                            도봉구는 인구 30.3만 명 대비 문화 행사 수가 52건에 불과하여 <strong>공급 점수(0.99)</strong>가 극도로 높고(소외됨), 대중교통 접근 지표인 지하철역 수 역시 3개로 <strong>접근성 점수(0.97)</strong>가 매우 취약합니다.
                             이에 더해 유료 행사 비율 또한 84.6%에 달해 문화 생활의 지리적·재정적 장벽이 모두 결합된 <strong>최우선 지원 대상 자치구</strong>로 확인되었습니다.
                         </p>
                     </div>
@@ -1065,9 +1068,9 @@
                 badgeColor = "bg-emerald-600 text-white font-black animate-pulse";
                 depthAnalysis = `
                     <div class="p-5 bg-emerald-950/40 border border-emerald-900/60 rounded-2xl space-y-2">
-                        <p class="text-xs text-emerald-400 font-black">🔥 2위 중랑구 진단 총평 (경제적 장벽 집중)</p>
-                        <p class="text-xs md:text-sm text-[var(--text-color)] leading-relaxed font-semibold">
-                            중랑구는 55건의 행사를 보유해 도봉구와 공급 밀도는 유사하지만, <strong>무료 행사 비율이 14.5%로 서울시 25개 자치구 중 가장 낮아(1.0)</strong> 가장 높은 경제적 장벽을 형성하고 있습니다. 
+                        <p class="text-xs text-emerald-200 font-black">🔥 2위 중랑구 진단 총평 (경제적 장벽 집중)</p>
+                        <p class="text-xs md:text-sm text-white leading-relaxed font-semibold">
+                            중랑구는 55건의 행사를 보유해 도봉구와 공급 밀도는 유사하지만, <strong>무료 행사 비율이 14.5%로 서울시 25개 자치구 중 가장 낮아(1.0)</strong> 가장 높은 경제적 장벽을 형성하고 있습니다.
                             문화 수요가 왕성한 20대 타겟에게 지불 장벽을 낮출 수 있는 <strong>공공 주도의 무료 대중콘서트/영화 상영 인센티브 정책</strong>이 긴급히 요청됩니다.
                         </p>
                     </div>
@@ -1076,9 +1079,9 @@
                 badgeColor = "bg-indigo-600 text-white font-black animate-pulse";
                 depthAnalysis = `
                     <div class="p-5 bg-indigo-950/40 border border-indigo-900/60 rounded-2xl space-y-2">
-                        <p class="text-xs text-indigo-400 font-black">🔥 3위 양천구 진단 총평 (지리적 공급 불균형)</p>
-                        <p class="text-xs md:text-sm text-[var(--text-color)] leading-relaxed font-semibold">
-                            양천구는 인구가 42.8만 명으로 매우 밀집된 주거 자치구이나, 문화 공급은 59건에 불과해 <strong>공급 점수(0.99)</strong>가 극도로 높게 평가되었습니다. 
+                        <p class="text-xs text-indigo-200 font-black">🔥 3위 양천구 진단 총평 (지리적 공급 불균형)</p>
+                        <p class="text-xs md:text-sm text-white leading-relaxed font-semibold">
+                            양천구는 인구가 42.8만 명으로 매우 밀집된 주거 자치구이나, 문화 공급은 59건에 불과해 <strong>공급 점수(0.99)</strong>가 극도로 높게 평가되었습니다.
                             교통 중심의 지하철역 수(5개)도 인구 대비 턱없이 부족해, 서남권 외곽 유휴 인프라(안양천 등 수변 공간)를 혁신적으로 접목한 <strong>체험형 야외 문화 공간의 대안적 발굴</strong>이 필요합니다.
                         </p>
                     </div>
