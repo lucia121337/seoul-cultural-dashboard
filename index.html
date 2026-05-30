@@ -227,6 +227,22 @@
         /* 검증 테이블 전용 폰트 축소 */
         .verify-table td, .verify-table th { font-size: 12px !important; }
         .verify-table .text-\[10px\] { font-size: 10px !important; }
+
+        /* 히트맵 지도 스타일 */
+        .heatmap-district {
+            stroke: var(--map-stroke);
+            stroke-width: 1.2px;
+            cursor: pointer;
+            transition: filter 0.2s;
+        }
+        .heatmap-district:hover { filter: brightness(0.82); }
+        .heatmap-top3 {
+            stroke: #fff !important;
+            stroke-width: 3px !important;
+            stroke-dasharray: 6,2 !important;
+            filter: drop-shadow(0 0 4px rgba(0,0,0,0.45));
+        }
+        .heatmap-top3:hover { filter: brightness(0.85) drop-shadow(0 0 5px rgba(0,0,0,0.5)); }
     </style>
 </head>
 <body class="p-0 leading-relaxed light-theme">
@@ -504,7 +520,16 @@
             <text x="696.30" y="347.85" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">강동구</text> <text x="647.55" y="433.92" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">송파구</text> <text x="565.29" y="449.24" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">강남구</text> <text x="505.35" y="489.15" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">서초구</text> <text x="349.28" y="487.91" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">관악구</text> <text x="354.13" y="437.36" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">동작구</text> <text x="287.10" y="397.89" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">영등포구</text> <text x="278.60" y="499.51" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">금천구</text> <text x="197.29" y="443.31" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">구로구</text> <text x="136.93" y="332.46" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">강서구</text> <text x="197.88" y="392.34" class="district-label label-highlight-rank-3 select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">🥉 양천</text> <text x="293.32" y="326.82" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">마포구</text> <text x="344.38" y="295.41" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">서대문구</text> <text x="317.86" y="239.10" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">은평구</text> <text x="574.71" y="177.38" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">노원구</text> <text x="495.46" y="142.03" class="district-label label-highlight-rank-1 select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">🥇 도봉</text> <text x="455.57" y="195.07" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">강북구</text> <text x="472.44" y="252.88" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">성북구</text> <text x="604.72" y="268.87" class="district-label label-highlight-rank-2 select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">🥈 중랑</text> <text x="540.00" y="292.48" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">동대문구</text> <text x="597.01" y="347.08" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">광진구</text> <text x="499.98" y="343.54" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">성동구</text> <text x="413.36" y="371.50" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">용산구</text> <text x="433.58" y="341.55" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">중구</text> <text x="408.93" y="270.59" class="district-label label-normal select-none cursor-pointer text-center pointer-events-none" text-anchor="middle">종로구</text>
         </g>
     </svg>
-                        <p class="mt-4 text-[11px] text-[var(--text-color)] font-bold">[그림 1] 서울시 문화소외지수 공간 분포 맵 (자치구를 클릭하면 세부 분석이 표시됩니다)</p>
+                        <div class="flex items-center justify-center gap-2 mt-3 mb-1 flex-wrap">
+                            <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">낮음 (문화 인프라 양호)</span>
+                            <div style="width:80px; height:8px; background: linear-gradient(to right, rgb(96,165,250), rgb(250,204,21), rgb(239,68,68)); border-radius:4px; flex-shrink:0;"></div>
+                            <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">높음 (소외)</span>
+                            <div class="flex items-center gap-1 ml-2">
+                                <div style="width:18px; height:8px; border: 2.5px dashed #fff; background:rgb(220,38,38); border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.3);"></div>
+                                <span style="font-size:10px" class="text-[var(--text-muted)] font-bold">TOP 3 소외지역</span>
+                            </div>
+                        </div>
+                        <p class="mt-2 text-[11px] text-[var(--text-color)] font-bold text-center">[그림 1] 서울시 문화소외지수 공간 분포 맵<br><span class="text-[var(--text-muted)] font-medium">(자치구를 클릭하면 세부 분석이 표시됩니다)</span></p>
                     </div>
                 </div>
                 <div class="flex flex-col justify-between space-y-6">
@@ -970,6 +995,35 @@
         "cultural_neglect_index": 0.605393882213127
     }
 };
+
+        // 히트맵 색상 적용 (blue → yellow → red)
+        (function applyHeatmap() {
+            const vals = Object.values(districtStats).map(d => d.cultural_neglect_index);
+            const minV = Math.min(...vals), maxV = Math.max(...vals);
+            const top3 = new Set(['도봉구','중랑구','양천구']);
+            Object.entries(districtStats).forEach(([name, data]) => {
+                const el = document.getElementById('path-' + name);
+                if (!el) return;
+                const t = (data.cultural_neglect_index - minV) / (maxV - minV);
+                let r, g, b;
+                if (t < 0.5) {
+                    const s = t * 2;
+                    r = Math.round(96  + (250 - 96)  * s);
+                    g = Math.round(165 + (204 - 165) * s);
+                    b = Math.round(250 + (21  - 250) * s);
+                } else {
+                    const s = (t - 0.5) * 2;
+                    r = Math.round(250 + (239 - 250) * s);
+                    g = Math.round(204 + (68  - 204) * s);
+                    b = Math.round(21  + (68  - 21)  * s);
+                }
+                el.style.fill = `rgb(${r},${g},${b})`;
+                el.style.fillOpacity = '0.88';
+                el.classList.remove('normal-district','highlight-rank-1','highlight-rank-2','highlight-rank-3');
+                el.classList.add('heatmap-district');
+                if (top3.has(name)) el.classList.add('heatmap-top3');
+            });
+        })();
         
         // 소외지수 기준 내림차순 정렬하여 순위(Rank) 자동 부여
         const sortedDistricts = Object.keys(districtStats).map(name => ({
